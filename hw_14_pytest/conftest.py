@@ -10,12 +10,6 @@ def create_human():
 
 
 @pytest.fixture()
-def create_almost_dead_human():
-    man = Human("Elon Musk", 99, "male")
-    return man
-
-
-@pytest.fixture()
 def create_dead_human():
     man = Human("Elon Musk", 100, "male")
     return man

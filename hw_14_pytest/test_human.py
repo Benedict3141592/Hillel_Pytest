@@ -3,13 +3,13 @@ import pytest
 
 def test_age(create_human):
     man = create_human
-    check_age = 52
+    check_age = man.age
     assert man.age == check_age, "Age does not match"
 
 
 def test_gender(create_human):
     man = create_human
-    check_gender = "male"
+    check_gender = man.gender
     assert man.gender == check_gender, "Gender does not match"
 
 
@@ -30,25 +30,22 @@ def test_change_gender(create_human):
 def test_change_same_gender(create_human):
     man = create_human
     new_gender = "male"
-    try:
+    with pytest.raises(Exception, match="Elon Musk already has gender 'male'"):
         man.change_gender(new_gender)
-    except Exception as exc:
-        assert str(exc) == "Elon Musk already has gender 'male'", "Gender was changed"
 
 
 def test_check_invalid_gender(create_human):
     man = create_human
     new_gender = "other"
-    with pytest.raises(Exception):
+    with pytest.raises(Exception, match="Not correct name of gender"):
         man.change_gender(new_gender)
 
 
-def test_is_dead(create_almost_dead_human):
-    almost_dead = create_almost_dead_human
-    try:
-        almost_dead.grow()
-    except Exception as exc:
-        assert str(exc) == "Elon Musk is already dead...", "Elon Musk is not dead"
+def test_is_dead(create_dead_human):
+    dead_man = create_dead_human
+    dead_man.grow()
+    with pytest.raises(Exception, match="Elon Musk is already dead..."):
+        dead_man.grow()
 
 
 def test_100_years_old(create_human):
@@ -59,17 +56,15 @@ def test_100_years_old(create_human):
 
 
 def test_dead_human_change_gender(create_dead_human):
-    man = create_dead_human
+    dead_man = create_dead_human
     new_gender = "female"
-    try:
-        man.change_gender(new_gender)
-    except Exception as exc:
-        assert str(exc) == "Elon Musk is already dead...", "Gender was changed"
+    dead_man.grow()
+    with pytest.raises(Exception, match="Elon Musk is already dead..."):
+        dead_man.change_gender(new_gender)
 
 
 def test_set_101_age(create_dead_human):
     man = create_dead_human
-    try:
+    man.grow()
+    with pytest.raises(Exception, match="Elon Musk is already dead..."):
         man.grow()
-    except Exception as exc:
-        assert str(exc) == "Elon Musk is already dead...", "Elon Musk is not dead"
