@@ -30,7 +30,7 @@ class SearchPage(BasePage):
     def click_on_lang_checkbox(self):
         self.click(self.__language_checkbox)
         self.click(self.__language_checkbox)
-        self.click(self.__language_checkbox)
+
         return self
 
     def choose_deutsch_lang(self):

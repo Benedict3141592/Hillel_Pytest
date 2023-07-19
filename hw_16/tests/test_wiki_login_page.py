@@ -1,10 +1,9 @@
 from hw_16.page_objects.login_page import LoginPage
 from hw_16.page_objects.main_page import MainPage
-from hw_16.utilities.config_reader import ReadConfig
 
 
-def test_login(create_driver):
-    user_name, password = ReadConfig.get_user_data()
+def test_login(create_driver, env):
+    user_name, password = env.login, env.password
     driver = create_driver
 
     MainPage(driver).click_to_login_page()

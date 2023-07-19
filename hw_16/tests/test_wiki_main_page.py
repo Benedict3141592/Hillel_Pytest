@@ -1,9 +1,8 @@
 from hw_16.page_objects.main_page import MainPage
-from hw_16.utilities.config_reader import ReadConfig
 
 
-def test_main_page(create_driver):
-    file_path = ReadConfig.get_download_folder_path()
+def test_main_page(create_driver, env):
+    file_path = env.path
     driver = create_driver
     main = MainPage(driver)
     main.click_to_open_checkbox().click_to_download_page().click_download_button()

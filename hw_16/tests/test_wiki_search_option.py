@@ -1,10 +1,9 @@
 from hw_16.page_objects.search_page import SearchPage
-from hw_16.utilities.config_reader import ReadConfig
 
 
-def test_search_option(create_driver):
+def test_search_option(create_driver, env):
     driver = create_driver
-    ruscism, selenium, ukraine, sheva = ReadConfig.get_searching_data()
+    ruscism, selenium, ukraine, sheva = env.search_ruscism, env.search_selenium, env.search_ukraine, env.search_sheva
     search_page = SearchPage(driver)
     search_page.set_searching_data(ruscism).click_search_button_main()
     assert "Ruscism - Wikipedia" in driver.title
