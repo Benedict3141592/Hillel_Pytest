@@ -98,5 +98,5 @@ class DonationPage(BasePage):
     def transmit_donation(self):
         self.click(self.__transmit_donation_button)
 
-    def check_error_message(self):
+    def is_error_message(self):
         return self.is_displayed(self.__error_message)

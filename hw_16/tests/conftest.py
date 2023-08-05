@@ -5,10 +5,10 @@ from hw_16.utilities.driver_factory import create_driver_factory
 
 
 @pytest.fixture()
-def create_driver():
+def create_driver(page_url):
     driver = create_driver_factory(ReadConfig.get_browser_id())
     driver.maximize_window()
-    driver.get(ReadConfig.get_app_base_url())
+    driver.get(ReadConfig.get_url(page_url))
     yield driver
     driver.quit()
 

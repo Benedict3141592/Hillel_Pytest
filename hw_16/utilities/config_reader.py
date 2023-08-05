@@ -12,8 +12,8 @@ class ReadConfig:
         return config.get("browser_data", "browser_id")
 
     @staticmethod
-    def get_app_base_url():
-        return config.get("app_data", "base_url")
+    def get_url(url):
+        return config.get("app_data", url)
 
     @staticmethod
     def get_app_donation_url():

@@ -33,7 +33,7 @@ class MainPage(BasePage):
         return self
 
     @staticmethod
-    def verify_file(path):
+    def is_file_in_folder(path):
         return os.path.exists(path) and os.path.isfile(path)
 
     @staticmethod

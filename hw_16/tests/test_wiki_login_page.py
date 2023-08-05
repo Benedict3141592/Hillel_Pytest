@@ -5,7 +5,7 @@ from hw_16.utilities.config_reader import ReadConfig
 
 def test_login(create_driver):
     user_name, password = ReadConfig.get_user_data()
-    driver = create_driver
+    driver = create_driver("base_url")
 
     MainPage(driver).click_to_login_page()
 
