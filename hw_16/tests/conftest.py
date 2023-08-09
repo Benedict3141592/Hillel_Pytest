@@ -7,7 +7,6 @@ from hw_16.page_objects.create_page import CreatePage
 from hw_16.page_objects.login_page import LoginPage
 from hw_16.page_objects.main_page import MainPage
 from hw_16.page_objects.search_page import SearchPage
-from hw_16.utilities.config_reader import ReadConfig
 from hw_16.utilities.driver_factory import create_driver_factory
 
 
@@ -23,7 +22,7 @@ def env():
 def create_driver(request, env):
     driver = create_driver_factory(env.browser_id)
     driver.maximize_window()
-    driver.get(request.param)
+    driver.get(eval(request.param))
     yield driver
     driver.quit()
 

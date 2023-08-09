@@ -2,7 +2,7 @@ import pytest
 from hw_16.page_objects.donation_page import DonationPage
 
 
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_donation_url()], indirect=True)
+@pytest.mark.parametrize("create_driver", ["env.donation_url"], indirect=True)
 def test_donation_page_set_invalid_payment_data(create_driver, env):
     card_number, expiration_date, cvv = env.card_number, env.expiration_date, env.security_code
     enter_card = DonationPage(create_driver)
@@ -15,7 +15,7 @@ def test_donation_page_set_invalid_payment_data(create_driver, env):
         "No expiration date error message"
 
 
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_donation_url()], indirect=True)
+@pytest.mark.parametrize("create_driver", ["env.donation_url"], indirect=True)
 def test_donation_page_set_valid_personal_data(create_driver, env):
     first_name, last_name, email = env.first_name, env.last_name, env.email
     enter_personal_data = DonationPage(create_driver)
@@ -28,7 +28,7 @@ def test_donation_page_set_valid_personal_data(create_driver, env):
     assert enter_personal_data.is_email_valid() == "joe.biden@usa.gov", "Email is not joe.biden@usa.gov"
 
 
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_donation_url()], indirect=True)
+@pytest.mark.parametrize("create_driver", ["env.donation_url"], indirect=True)
 def test_donation_page_set_invalid_email(create_driver, env):
     first_name, last_name, invalid_email = env.first_name, env.last_name, env.invalid_email
     enter_personal_data = DonationPage(create_driver)
@@ -40,7 +40,7 @@ def test_donation_page_set_invalid_email(create_driver, env):
         "No email error message"
 
 
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_donation_url()], indirect=True)
+@pytest.mark.parametrize("create_driver", ["env.donation_url"], indirect=True)
 def test_donation_set_valid_address_data(create_driver, env):
     street, postal_code, city = env.street, env.postal_code, env.city
     enter_address = DonationPage(create_driver)
@@ -53,7 +53,7 @@ def test_donation_set_valid_address_data(create_driver, env):
     assert enter_address.is_city_name_valid() == "Washington", "Alert! Wrong city"
 
 
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_donation_url()], indirect=True)
+@pytest.mark.parametrize("create_driver", ["env.donation_url"], indirect=True)
 def test_donation_page_must_be_valid_data(create_driver, env):
     card_number, expiration_date, cvv = env.card_number, env.expiration_date, env.security_code
     first_name, last_name, email = env.first_name, env.last_name, env.email

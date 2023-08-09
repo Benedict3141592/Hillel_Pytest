@@ -1,10 +1,7 @@
 import pytest
 
-from hw_16.page_objects.search_page import SearchPage
-from hw_16.utilities.config_reader import ReadConfig
 
-
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_base_url()], indirect=True)
+@pytest.mark.parametrize("create_driver", ["env.base_url"], indirect=True)
 def test_search_option(create_driver, search_page, env):
     ruscism, selenium, ukraine, sheva = env.search_ruscism, env.search_selenium, env.search_ukraine, env.search_sheva
 
@@ -18,9 +15,9 @@ def test_search_option(create_driver, search_page, env):
     assert "Andrij Ševčenko - Wikipedia" in create_driver.title, "Alert! Andrij Ševčenko not in the title!"
 
 
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_base_url()], indirect=True)
-def test_search_option_via_invalid_request(create_driver, search_page):
-    invalid_request = ReadConfig.get_invalid_searching_data()
+@pytest.mark.parametrize("create_driver", ["env.base_url"], indirect=True)
+def test_search_option_via_invalid_request(create_driver, search_page, env):
+    invalid_request = env.invalid_request
 
     search_page.set_searching_data(invalid_request).click_search_button_main()
 
@@ -28,9 +25,9 @@ def test_search_option_via_invalid_request(create_driver, search_page):
         "Alert! Wrong answer for request"
 
 
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_base_url()], indirect=True)
-def test_search_option_parametrise_request(create_driver, search_page):
-    search_request, search_supplement = ReadConfig.get_supplement_searching_data()
+@pytest.mark.parametrize("create_driver", ["env.base_url"], indirect=True)
+def test_search_option_parametrise_request(create_driver, search_page, env):
+    search_request, search_supplement = env.search_swiss, env.search_swiss_supplement
 
     (search_page.set_searching_data(search_request).click_search_button_main().click_advanced_search_list().
      set_supplement_data(search_supplement).click_search_button())
@@ -39,16 +36,16 @@ def test_search_option_parametrise_request(create_driver, search_page):
         "Alert! Request is not Cantons of Switzerland"
 
 
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_base_url()], indirect=True)
+@pytest.mark.parametrize("create_driver", ["env.base_url"], indirect=True)
 def test_search_option_empty_request(create_driver, search_page):
     search_page.set_searching_data("").click_search_button_main()
 
     assert search_page.is_value_empty() == "", "Alert! Value is not ''"
 
 
-@pytest.mark.parametrize("create_driver", [ReadConfig.get_base_url()], indirect=True)
-def test_search_option_request_by_cyrillic(create_driver, search_page):
-    search_request = ReadConfig.get_cyrillic_searching_data()
+@pytest.mark.parametrize("create_driver", ["env.base_url"], indirect=True)
+def test_search_option_request_by_cyrillic(create_driver, search_page, env):
+    search_request = env.search_cyrillic
 
     search_page.set_searching_data(search_request).click_search_button_main()
 
