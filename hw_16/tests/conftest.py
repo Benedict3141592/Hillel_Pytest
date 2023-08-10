@@ -31,11 +31,11 @@ def create_driver(request, env):
 
 @pytest.fixture()
 def create_mock_booking(env):
-    mock_data = BookingAPI(env).get_booking_by_id()
+    mock_data = BookingAPI(env).get_booking_by_id(1)
     booking = Booking(**mock_data.json())
     return booking
-  
-  
+
+
 @pytest.fixture()
 def search_page(create_driver):
     driver = create_driver
