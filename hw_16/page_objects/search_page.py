@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+import allure
 
 from hw_16.utilities.ui_utilities.base_page import BasePage
 
@@ -23,56 +24,70 @@ class SearchPage(BasePage):
     __attribute_value = "value"
     __title_value = (By.CSS_SELECTOR, "span[class='mw-page-title-main']")
 
+    @allure.step
     def set_searching_data(self, searching_data):
         self.send_keys(self.__search_form, searching_data)
         return self
 
+    @allure.step
     def click_search_button_main(self):
         self.click(self.__search_button_main)
         return self
 
+    @allure.step
     def click_search_button_de_ua(self):
         self.click(self.__search_button_de)
         return self
 
+    @allure.step
     def click_on_lang_checkbox(self):
         self.click(self.__language_checkbox)
         self.click(self.__language_checkbox)
 
         return self
 
+    @allure.step
     def choose_deutsch_lang(self):
         self.click(self.__deutsch_language)
         return self
 
+    @allure.step
     def choose_ukrainian_lang(self):
         self.click(self.__ukrainian_language)
         return self
 
+    @allure.step
     def choose_italiano_lang(self):
         self.click(self.__italiano_language)
         return self
 
+    @allure.step
     def click_advanced_search_list(self):
         self.click(self.__advanced_search_list)
         return self
 
+    @allure.step
     def set_supplement_data(self, request):
         self.send_keys(self.__these_words_input, request)
         return self
 
+    @allure.step
     def click_search_button(self):
         self.click(self.__search_button)
         return self
 
+    @allure.step
     def is_request_not_found(self):
         return self.get_text(self.__search_not_found)
 
+    @allure.step
     def is_request_found(self):
         return self.get_text(self.__search_found)
 
+    @allure.step
     def is_value_empty(self):
         return self.get_attribute(self.__search_input, self.__attribute_value)
 
+    @allure.step
     def is_title_correct(self):
         return self.get_text(self.__title_value)

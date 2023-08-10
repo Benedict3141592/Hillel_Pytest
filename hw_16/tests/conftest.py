@@ -1,4 +1,7 @@
 import json
+from contextlib import suppress
+
+import allure
 import pytest
 
 from hw_16.api_collections.data_classes.booking_data import Booking
@@ -26,7 +29,19 @@ def create_driver(request, env):
     driver.maximize_window()
     driver.get(eval(request.param))
     yield driver
+    if request.node.rep_call.failed:
+        with suppress(Exception):
+            allure.attach(driver.get_screenshot_as_png(),
+                          name=request.function.__name__,
+                          attachment_type=allure.attachment_type.PNG)
     driver.quit()
+
+
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
 
 
 @pytest.fixture()
