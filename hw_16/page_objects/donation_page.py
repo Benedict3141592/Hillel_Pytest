@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from hw_16.utilities.ui_utilities.base_page import BasePage
 
 
@@ -25,7 +24,10 @@ class DonationPage(BasePage):
     __state_widget = (By.CSS_SELECTOR, "#stored_customer_state-widget")
     __state_option_dc = (By.XPATH, '//option[@value="DC"]')
     __transmit_donation_button = (By.XPATH, "//button[@class='btn btn-block btn-primary md-ripple']")
-    __error_message = (By.CSS_SELECTOR, "#cardno-error-widget")
+    __card_error_message = (By.CSS_SELECTOR, "#cardno-error-widget")
+    __expiration_date_error_message = (By.CSS_SELECTOR, "#exp-error-widget")
+    __email_error_message = (By.CSS_SELECTOR, "#stored_customer_email-error-widget")
+    __attribute_value = "value"
 
     def choose_amount_of_donation(self):
         self.click(self.__amount_of_donation)
@@ -45,6 +47,10 @@ class DonationPage(BasePage):
 
     def set_security_code(self, security_code):
         self.send_keys(self.__security_code_input, security_code)
+        return self
+
+    def erase_one_letter_svv(self):
+        self.send_keys_backspace(self.__security_code_input)
         return self
 
     def click_on_salutation(self):
@@ -98,5 +104,29 @@ class DonationPage(BasePage):
     def transmit_donation(self):
         self.click(self.__transmit_donation_button)
 
-    def check_error_message(self):
-        return self.is_displayed(self.__error_message)
+    def is_card_value_error_message(self):
+        return self.get_text(self.__card_error_message)
+
+    def is_expiration_date_error_message(self):
+        return self.get_text(self.__expiration_date_error_message)
+
+    def is_email_error_message(self):
+        return self.get_text(self.__email_error_message)
+
+    def is_street_name_valid(self):
+        return self.get_attribute(self.__street_input, self.__attribute_value)
+
+    def is_postal_code_valid(self):
+        return self.get_attribute(self.__postal_code_input, self.__attribute_value)
+
+    def is_city_name_valid(self):
+        return self.get_attribute(self.__city_input, self.__attribute_value)
+
+    def is_first_name_valid(self):
+        return self.get_attribute(self.__first_name_input, self.__attribute_value)
+
+    def is_last_name_valid(self):
+        return self.get_attribute(self.__last_name_input, self.__attribute_value)
+
+    def is_email_valid(self):
+        return self.get_attribute(self.__email_input, self.__attribute_value)
