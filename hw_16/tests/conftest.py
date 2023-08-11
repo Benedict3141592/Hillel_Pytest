@@ -52,6 +52,11 @@ def create_mock_booking(env):
 
 
 @pytest.fixture()
+def booking_api(env):
+    yield BookingAPI(env)
+
+
+@pytest.fixture()
 def search_page(create_driver):
     driver = create_driver
     yield SearchPage(driver)
