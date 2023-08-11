@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+import allure
 import os.path
 
 from hw_16.utilities.ui_utilities.base_page import BasePage
@@ -28,65 +29,82 @@ class MainPage(BasePage):
     __css_value_background_color = "background-color"
     __css_value_font_family = "font-family"
 
+    @allure.step
     def click_to_login_page(self):
         self.click(self.__login_link)
 
+    @allure.step
     def is_user_label_displayed(self):
         return self.is_displayed(self.__user_label)
 
+    @allure.step
     def click_to_open_checkbox(self):
         self.click(self.__checkbox)
         return self
 
+    @allure.step
     def click_to_download_page(self):
         self.click(self.__download_as_pdf)
         return self
 
+    @allure.step
     def click_download_button(self):
         self.click(self.__download_button)
         return self
 
+    @allure.step
     def click_sidebar_menu(self):
         self.click(self.__sidebar_button)
         return self
 
+    @allure.step
     def click_main_page_link(self):
         self.click(self.__main_page_link)
         return self
 
+    @allure.step
     def click_contents_link(self):
         self.click(self.__contents_link)
         return self
 
+    @allure.step
     def click_current_events_link(self):
         self.click(self.__currents_events)
         return self
 
+    @allure.step
     def click_about_link(self):
         self.click(self.__about_link)
         return self
 
+    @allure.step
     def click_common_page(self):
         self.click(self.__commons_page)
         return self
 
+    @allure.step
     def click_wikibooks_page(self):
         self.click(self.__wikibooks_page)
         return self
 
+    @allure.step
     def click_mediawiki_page(self):
         self.click(self.__mediawiki_page)
         return self
 
+    @allure.step
     def is_wiki_logo_icon(self):
         return self.get_position(self.__wiki_logo_icon)
 
+    @allure.step
     def is_wiki_logo_container(self):
         return self.get_position(self.__wiki_logo_container)
 
+    @allure.step
     def is_css_value_background_color(self):
         return self.get_css_value(self.__page_container, self.__css_value_background_color)
 
+    @allure.step
     def is_css_value_font_family(self):
         return self.get_css_value(self.__page_container, self.__css_value_font_family)
 
