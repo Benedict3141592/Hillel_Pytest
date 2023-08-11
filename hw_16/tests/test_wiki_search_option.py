@@ -49,4 +49,4 @@ def test_search_option_request_by_cyrillic(create_driver, search_page, env):
 
     search_page.set_searching_data(search_request).click_search_button_main()
 
-    assert search_page.is_title_correct() == "Ukraine1", "Alert! Title is not Ukraine"
+    assert search_page.is_title_correct() == "Ukraine", "Alert! Title is not Ukraine"
