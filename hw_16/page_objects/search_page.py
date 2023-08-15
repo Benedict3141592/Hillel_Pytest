@@ -8,7 +8,8 @@ class SearchPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    __search_form = (By.XPATH, "//input[@name='search']")
+    __search_form = (By.CSS_SELECTOR, "input[title='Search Wikipedia [alt-shift-f]']")
+    __search_form_2 = (By.CSS_SELECTOR, "input[name='search']")
     __search_button_main = (By.CSS_SELECTOR, "#searchform > div > button")
     __search_button_de = (By.CSS_SELECTOR, "#searchButton")
     __language_checkbox = (By.CSS_SELECTOR, "#p-lang-btn")
@@ -30,6 +31,11 @@ class SearchPage(BasePage):
         return self
 
     @allure.step
+    def set_searching_data_2(self, searching_data):
+        self.send_keys(self.__search_form_2, searching_data)
+        return self
+
+    @allure.step
     def click_search_button_main(self):
         self.click(self.__search_button_main)
         return self
@@ -42,8 +48,6 @@ class SearchPage(BasePage):
     @allure.step
     def click_on_lang_checkbox(self):
         self.click(self.__language_checkbox)
-        self.click(self.__language_checkbox)
-
         return self
 
     @allure.step

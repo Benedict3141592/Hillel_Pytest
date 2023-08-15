@@ -1,7 +1,6 @@
 from http import HTTPStatus
 import time
 from hw_16.api_collections.data_classes.booking_data import Booking
-from hw_16.api_collections.booking_api import BookingAPI
 
 
 def test_get_bookings_ids(env, booking_api):
