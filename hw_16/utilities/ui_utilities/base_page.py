@@ -23,10 +23,10 @@ class BasePage:
         return self.__wait_until_element_visible(locator).send_keys(Keys.BACKSPACE)
 
     def click(self, locator):
-        self.__wait_until_element_clickable(locator).click()
+        return self.__wait_until_element_clickable(locator).click()
 
     def get_back(self):
-        self._driver.back()
+        return self._driver.back()
 
     def is_displayed(self, locator):
         return self._wait.until(ec.presence_of_element_located(locator)).is_displayed()

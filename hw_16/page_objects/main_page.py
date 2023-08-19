@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 import allure
 import os.path
+import time
 
 from hw_16.utilities.ui_utilities.base_page import BasePage
 
@@ -107,6 +108,14 @@ class MainPage(BasePage):
     @allure.step
     def is_css_value_font_family(self):
         return self.get_css_value(self.__page_container, self.__css_value_font_family)
+
+    @staticmethod
+    def wait_file(path, timeout=10, interval=0.1):
+        start_time = time.time()
+        while os.path.isfile(path) is not True:
+            if time.time() - start_time >= timeout:
+                raise TimeoutError("Timeout error.")
+            time.sleep(interval)
 
     @staticmethod
     def is_file_in_folder(path):

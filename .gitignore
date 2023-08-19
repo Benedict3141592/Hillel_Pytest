@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 allure_report
-Hillel_Pytest
 
 # C extensions
 *.so

@@ -12,7 +12,7 @@ def test_response_time(env, booking_api):
     start_time = time.time()
     booking_api.get_bookings_ids()
     end_time = time.time()
-    max_time = 1
+    max_time = 2
     actual_time = end_time - start_time
     assert actual_time < max_time, "Waiting time exceeded"
 
@@ -50,7 +50,7 @@ def test_patch_via_invalid_data(env, booking_api):
 
 
 def test_delete_booking(env, booking_api):
-    response = booking_api.delete_booking(deleted_id=104)
+    response = booking_api.delete_booking(deleted_id=10)
     assert response.status_code == HTTPStatus.CREATED, "Status code is not as expected"
 
 

@@ -1,5 +1,4 @@
 import pytest
-from time import sleep
 
 
 @pytest.mark.parametrize("create_driver", ["env.base_url"], indirect=True)
@@ -7,7 +6,7 @@ def test_main_page_download_file(create_driver, main_page, env):
     file_path = env.path
 
     main_page.click_to_open_checkbox().click_to_download_page().click_download_button()
-    sleep(2)
+    main_page.wait_file(file_path)
     assert main_page.is_file_in_folder(file_path), "File not in the folder"
     main_page.delete_file(file_path)
 
