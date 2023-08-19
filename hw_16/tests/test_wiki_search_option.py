@@ -10,7 +10,7 @@ def test_search_option(create_driver, search_page, env):
     search_page.wait_loading()
     search_page.set_searching_data(selenium).click_search_button_main().click_on_lang_checkbox().choose_deutsch_lang()
     assert "Selen – Wikipedia" in create_driver.title, "Alert! Selen not in the title!"
-    search_page.set_searching_data(ukraine).click_search_button_de_ua().choose_franche_lang()
+    search_page.set_searching_data(ukraine).click_search_button_de_ua().choose_france_lang()
     assert "Ukraine — Wikipédia" in create_driver.title, "Alert! Ukraine not in the title!"
     search_page.click_on_lang_checkbox().choose_italiano_lang().set_searching_data(sheva).click_search_button_de_ua()
     assert "Andrij Ševčenko - Wikipedia" in create_driver.title, "Alert! Andrij Ševčenko not in the title!"

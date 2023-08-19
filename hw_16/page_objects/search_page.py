@@ -14,7 +14,7 @@ class SearchPage(BasePage):
     __search_button_de = (By.CSS_SELECTOR, "#searchButton")
     __language_checkbox = (By.CSS_SELECTOR, "#p-lang-btn")
     __deutsch_language = (By.XPATH, '//a[@lang="de"][@dir="ltr"]')
-    __franche_language = (By.XPATH, '//a[@lang="fr"]')
+    __france_language = (By.XPATH, '//a[@lang="fr"]')
     __italiano_language = (By.XPATH, '//a[@lang="it"]')
     __search_not_found = (By.XPATH, "//*[@id='mw-content-text']/div[3]/div[1]/p[1]")
     __search_found = (By.XPATH, "//*[@id='mw-content-text']/div[3]/div[1]/p/b")
@@ -51,8 +51,8 @@ class SearchPage(BasePage):
         return self
 
     @allure.step
-    def choose_franche_lang(self):
-        self.click(self.__franche_language)
+    def choose_france_lang(self):
+        self.click(self.__france_language)
         return self
 
     @allure.step
@@ -94,7 +94,7 @@ class SearchPage(BasePage):
     @staticmethod
     def wait_loading(timeout=10, interval=0.1):
         start_time = time.time()
-        while time.time() - start_time < 0.6:
+        while time.time() - start_time < 0.7:
             if time.time() - start_time >= timeout:
                 raise TimeoutError("Timeout error.")
             time.sleep(interval)
