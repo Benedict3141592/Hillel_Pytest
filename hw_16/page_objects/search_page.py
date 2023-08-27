@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 import allure
+import time
 
 from hw_16.utilities.ui_utilities.base_page import BasePage
 
@@ -8,12 +9,12 @@ class SearchPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    __search_form = (By.XPATH, "//input[@name='search']")
+    __search_form = (By.CSS_SELECTOR, "input[name='search']")
     __search_button_main = (By.CSS_SELECTOR, "#searchform > div > button")
     __search_button_de = (By.CSS_SELECTOR, "#searchButton")
     __language_checkbox = (By.CSS_SELECTOR, "#p-lang-btn")
     __deutsch_language = (By.XPATH, '//a[@lang="de"][@dir="ltr"]')
-    __ukrainian_language = (By.XPATH, '//a[@lang="uk"]')
+    __france_language = (By.XPATH, '//a[@lang="fr"]')
     __italiano_language = (By.XPATH, '//a[@lang="it"]')
     __search_not_found = (By.XPATH, "//*[@id='mw-content-text']/div[3]/div[1]/p[1]")
     __search_found = (By.XPATH, "//*[@id='mw-content-text']/div[3]/div[1]/p/b")
@@ -42,8 +43,6 @@ class SearchPage(BasePage):
     @allure.step
     def click_on_lang_checkbox(self):
         self.click(self.__language_checkbox)
-        self.click(self.__language_checkbox)
-
         return self
 
     @allure.step
@@ -52,8 +51,8 @@ class SearchPage(BasePage):
         return self
 
     @allure.step
-    def choose_ukrainian_lang(self):
-        self.click(self.__ukrainian_language)
+    def choose_france_lang(self):
+        self.click(self.__france_language)
         return self
 
     @allure.step
@@ -91,3 +90,11 @@ class SearchPage(BasePage):
     @allure.step
     def is_title_correct(self):
         return self.get_text(self.__title_value)
+
+    @staticmethod
+    def wait_loading(timeout=10, interval=0.1):
+        start_time = time.time()
+        while time.time() - start_time < 0.7:
+            if time.time() - start_time >= timeout:
+                raise TimeoutError("Timeout error.")
+            time.sleep(interval)

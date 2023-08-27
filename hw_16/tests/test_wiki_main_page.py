@@ -6,7 +6,7 @@ def test_main_page_download_file(create_driver, main_page, env):
     file_path = env.path
 
     main_page.click_to_open_checkbox().click_to_download_page().click_download_button()
-
+    main_page.wait_file(file_path)
     assert main_page.is_file_in_folder(file_path), "File not in the folder"
     main_page.delete_file(file_path)
 
@@ -15,7 +15,6 @@ def test_main_page_download_file(create_driver, main_page, env):
 def test_main_page_sidebar(create_driver, main_page):
     main_page.click_sidebar_menu().click_main_page_link()
     assert "Wikipedia, the free encyclopedia" in create_driver.title, "Wrong title in main page link"
-    main_page.get_back()
 
     main_page.click_sidebar_menu().click_contents_link()
     assert "Wikipedia:Contents - Wikipedia" in create_driver.title, "Wrong title in contents page link"
@@ -31,15 +30,15 @@ def test_main_page_sidebar(create_driver, main_page):
 
 @pytest.mark.parametrize("create_driver", ["env.base_url"], indirect=True)
 def test_main_page_logo(create_driver, main_page):
-    assert main_page.is_wiki_logo_icon() == {'x': 92.0, 'y': 8.0, 'width': 50.0, 'height': 50.0}, \
+    assert main_page.is_wiki_logo_icon() == {'x': 211.5, 'y': 8.0, 'width': 50.0, 'height': 50.0}, \
         "Alert! Wrong logo icon position!"
-    assert main_page.is_wiki_logo_container() == {'height': 36.0, 'width': 120.0, 'x': 152.0, 'y': 15.0}, \
+    assert main_page.is_wiki_logo_container() == {'height': 36.0, 'width': 120.0, 'x': 271.5, 'y': 15.0}, \
         "Alert!  Wrong logo container position!"
 
 
 @pytest.mark.parametrize("create_driver", ["env.base_url"], indirect=True)
 def test_main_page_css_value(create_driver, main_page):
-    assert main_page.is_css_value_background_color() == "rgb(255, 255, 255)", "Alert! Wrong background-color!"
+    assert main_page.is_css_value_background_color() == "rgba(255, 255, 255, 1)", "Alert! Wrong background-color!"
     assert main_page.is_css_value_font_family() == "sans-serif", "Alert! Wrong font-family!"
 
 

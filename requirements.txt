@@ -4,3 +4,4 @@ requests==2.31.0
 allure-pytest==2.13.2
 SQLAlchemy==2.0.19
 mysql-connector-python==8.1.0
+pymongo==4.4.1
