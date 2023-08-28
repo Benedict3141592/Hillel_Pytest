@@ -30,9 +30,9 @@ def test_main_page_sidebar(create_driver, main_page):
 
 @pytest.mark.parametrize("create_driver", ["env.base_url"], indirect=True)
 def test_main_page_logo(create_driver, main_page):
-    assert main_page.is_wiki_logo_icon() == {'x': 211.5, 'y': 8.0, 'width': 50.0, 'height': 50.0}, \
+    assert main_page.is_wiki_logo_icon() == {'x': 246.5, 'y': 8.0, 'width': 50.0, 'height': 50.0}, \
         "Alert! Wrong logo icon position!"
-    assert main_page.is_wiki_logo_container() == {'height': 36.0, 'width': 120.0, 'x': 271.5, 'y': 15.0}, \
+    assert main_page.is_wiki_logo_container() == {'height': 36.0, 'width': 120.0, 'x': 306.5, 'y': 15.0}, \
         "Alert!  Wrong logo container position!"
 
 

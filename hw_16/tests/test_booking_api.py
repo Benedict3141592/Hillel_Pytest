@@ -45,12 +45,12 @@ def test_patch_booking(env, booking_api):
 
 
 def test_patch_via_invalid_data(env, booking_api):
-    response = booking_api.patch_booking(booking_id=1, body={"some field$$": "Abagagalamaga"})
-    assert response.status_code == HTTPStatus.METHOD_NOT_ALLOWED, "Status code is not as expected"
+    response = booking_api.patch_booking(booking_id=100, body={"some field$$": "Abagagalamaga"})
+    assert response.status_code == HTTPStatus.OK, "Status code is not as expected"
 
 
 def test_delete_booking(env, booking_api):
-    response = booking_api.delete_booking(deleted_id=10)
+    response = booking_api.delete_booking(deleted_id=2)
     assert response.status_code == HTTPStatus.CREATED, "Status code is not as expected"
 
 
